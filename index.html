@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凜凜蝶凜的翻唱曲库</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>凜凜蝶凜的翻唱曲库</h1>
+            <p class="description">欢迎来到凜凜蝶凜的歌单页面！这里收录了所有可以点播的翻唱曲目，希望能带给大家温暖与感动。</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">148</div>
+                    <div class="stat-label">可点播歌曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">52</div>
+                    <div class="stat-label">日语歌曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">83</div>
+                    <div class="stat-label">国语歌曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">13</div>
+                    <div class="stat-label">英语歌曲</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索歌曲名称或原唱...">
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-type="all">全部歌曲</button>
+            <button class="filter-btn" data-type="hot">热门推荐</button>
+            <button class="filter-btn" data-type="chinese">国语</button>
+            <button class="filter-btn" data-type="japanese">日语</button>
+            <button class="filter-btn" data-type="english">英语</button>
+        </div>
+
+        <div class="song-grid" id="songGrid">
+            <!-- 歌曲卡片将通过 JavaScript 动态生成 -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
