@@ -1,78 +1,76 @@
-// ¸èÇúÊı¾İ
 const songs = [
     {
-        title: "ÃÎÀïË®Ïç",
-        artist: "½­Éº",
+        title: "æ¢¦é‡Œæ°´ä¹¡",
+        artist: "æ±ŸçŠ",
         type: "chinese",
-        tag: "¹úÓï",
+        tag: "å›½è¯­",
         plays: 32,
         isHot: false
     },
     {
-        title: "ÄÁÑòÇú",
-        artist: "Ö£Ğ÷À¼",
+        title: "ç‰§ç¾Šæ›²",
+        artist: "éƒ‘ç»ªå…°",
         type: "chinese",
-        tag: "ÈÈÃÅ",
+        tag: "çƒ­é—¨",
         plays: 45,
         isHot: true
     },
     {
-        title: "ÇôÄñ",
-        artist: "ÕÅ»İÃÃ",
+        title: "å›šé¸Ÿ",
+        artist: "å¼ æƒ å¦¹",
         type: "chinese",
-        tag: "¹úÓï",
+        tag: "å›½è¯­",
         plays: 28,
         isHot: false
     },
     {
-        title: "×óÊÖÖ¸ÔÂ",
-        artist: "Èø¶¥¶¥",
+        title: "å·¦æ‰‹æŒ‡æœˆ",
+        artist: "è¨é¡¶é¡¶",
         type: "chinese",
-        tag: "ÈÈÃÅ",
+        tag: "çƒ­é—¨",
         plays: 56,
         isHot: true
     },
     {
-        title: "ÈºÇà",
+        title: "ç¾¤é’",
         artist: "YOASOBI",
         type: "japanese",
-        tag: "ÈÕÓï",
+        tag: "æ—¥è¯­",
         plays: 68,
         isHot: true
     },
     {
-        title: "¥¢¥¤¥É¥ë",
+        title: "ã‚¢ã‚¤ãƒ‰ãƒ«",
         artist: "YOASOBI",
         type: "japanese",
-        tag: "ÈÕÓï",
+        tag: "æ—¥è¯­",
         plays: 42,
         isHot: false
     }
 ];
 
-// ´´½¨¸èÇú¿¨Æ¬µÄº¯Êı
 function createSongCard(song) {
     return `
         <div class="song-card" data-type="${song.type}" data-hot="${song.isHot}">
             <div class="song-info">
                 <div class="song-title">${song.title}</div>
                 <div class="song-meta">
-                    <span class="song-artist">Ô­³ª£º${song.artist}</span>
+                    <span class="song-artist">åŸå”±ï¼š${song.artist}</span>
                     <span class="tag">${song.tag}</span>
                 </div>
-                <span class="plays-count">Ñİ³ª´ÎÊı£º${song.plays}´Î</span>
+                <span class="plays-count">æ¼”å”±æ¬¡æ•°ï¼š${song.plays}æ¬¡</span>
             </div>
         </div>
     `;
 }
 
-// äÖÈ¾ËùÓĞ¸èÇú
+// æ¸²æŸ“æ‰€æœ‰æ­Œæ›²
 function renderSongs(filteredSongs = songs) {
     const songGrid = document.getElementById('songGrid');
     songGrid.innerHTML = filteredSongs.map(createSongCard).join('');
 }
 
-// ËÑË÷¹¦ÄÜ
+// æœç´¢åŠŸèƒ½
 document.getElementById('searchInput').addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const filteredSongs = songs.filter(song => 
@@ -82,11 +80,11 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
     renderSongs(filteredSongs);
 });
 
-// É¸Ñ¡¹¦ÄÜ
+// ç­›é€‰åŠŸèƒ½
 document.querySelector('.filter-buttons').addEventListener('click', (e) => {
     if (!e.target.classList.contains('filter-btn')) return;
 
-    // ¸üĞÂ°´Å¥×´Ì¬
+    // æ›´æ–°æŒ‰é’®çŠ¶æ€
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     e.target.classList.add('active');
 
@@ -113,5 +111,5 @@ document.querySelector('.filter-buttons').addEventListener('click', (e) => {
     renderSongs(filteredSongs);
 });
 
-// ³õÊ¼äÖÈ¾
+// åˆå§‹æ¸²æŸ“
 renderSongs();
