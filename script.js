@@ -1,7 +1,7 @@
 // 解析CSV数据
 async function loadSongsFromCSV() {
     try {
-        const response = await fetch('songs.csv');
+        const response = await fetch('songs2.csv');
         const data = await response.text();
         const lines = data.split('\n').map(line => line.trim()).filter(line => line);
         
