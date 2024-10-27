@@ -7,7 +7,6 @@ let favoriteSongs = new Set();
 
 // 所有歌曲数据（示例数据，这里应包含全部歌曲数据）
 const songs = [{"title": "天使的指纹", "artist": "孙燕姿"}, {"title": "我很愉快", "artist": "孙燕姿"},
-               {"title": "开始懂了", "artist": "孙燕姿"}, {"title": "跳舞的梵谷", "artist": "孙燕姿"}, 
                {"title": " 我怀念的", "artist": "孙燕姿"}, {"title": "遇见", "artist": "孙燕姿"}, 
                {"title": "开始懂了", "artist": "孙燕姿"}, {"title": "天黑黑", "artist": "孙燕姿"}, 
                {"title": "慢慢喜欢你", "artist": "莫文蔚"}, {"title": "他不爱我", "artist": "莫文蔚"},
