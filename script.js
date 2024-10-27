@@ -2,7 +2,7 @@
 
 let filteredSongs = [];
 let currentPage = 1;
-const songsPerPage = 50;
+const songsPerPage = 30;
 let favoriteSongs = new Set();
 
 // 所有歌曲数据（示例数据，这里应包含全部歌曲数据）
