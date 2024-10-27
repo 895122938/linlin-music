@@ -1,7 +1,9 @@
 // script.js
 
-// 全局变量声明
 let filteredSongs = [];
+let currentPage = 1;
+const songsPerPage = 10;
+let favoriteSongs = new Set();
 
 // 所有歌曲数据（示例数据，这里应包含全部歌曲数据）
 const songs = [{"title": "天使的指纹", "artist": "孙燕姿"}, {"title": "我很愉快", "artist": "孙燕姿"},
@@ -66,14 +68,13 @@ const songs = [{"title": "天使的指纹", "artist": "孙燕姿"}, {"title": "�
                {"title": "云与海", "artist": "阿YueYue"}, {"title": "听见下雨的声音", "artist": "A-Lin"}];
 
 
-// 语言检测函数
+// 语言检测
 function detectLanguage(title) {
-    if (/[\u3040-\u30ff]/.test(title)) return 'japanese';     // 日文歌曲
-    if (/^[A-Za-z\s\-\'\"]+$/.test(title)) return 'english';  // 英文歌曲
-    return 'chinese';  // 默认为中文歌曲
+    if (/[\u3040-\u30ff]/.test(title)) return 'japanese'; 
+    if (/^[A-Za-z\s\-\'\"]+$/.test(title)) return 'english';
+    return 'chinese';
 }
 
-// 获取标签函数
 function getTag(type) {
     switch (type) {
         case 'japanese': return 'J-POP';
@@ -83,20 +84,17 @@ function getTag(type) {
     }
 }
 
-// 初始化函数
-document.addEventListener('DOMContentLoaded', async () => {
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
     filteredSongs = songs.map(song => ({
         ...song,
         type: detectLanguage(song.title),
         tag: getTag(detectLanguage(song.title)),
         isHot: false
     }));
-
     updateArtistFilter();
     updateStatistics();
     renderSongs();
-
-    // 输出加载的歌曲数量，用于调试
     console.log(`Loaded ${songs.length} songs`);
 });
 
@@ -112,7 +110,7 @@ function updateArtistFilter() {
     });
 }
 
-// 更新统计数据
+// 更新统计
 function updateStatistics() {
     document.getElementById('totalSongs').textContent = songs.length;
     document.getElementById('chineseSongs').textContent = songs.filter(song => song.type === 'chinese').length;
@@ -120,18 +118,80 @@ function updateStatistics() {
     document.getElementById('englishSongs').textContent = songs.filter(song => song.type === 'english').length;
 }
 
-// 渲染歌曲到页面
+// 渲染分页
+function renderPagination() {
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+    const totalPages = Math.ceil(filteredSongs.length / songsPerPage);
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.classList.add('page-btn');
+        if (i === currentPage) pageButton.classList.add('active');
+        pageButton.addEventListener('click', () => {
+            currentPage = i;
+            renderSongs();
+        });
+        pagination.appendChild(pageButton);
+    }
+}
+
+// 渲染歌曲
 function renderSongs() {
     const songGrid = document.getElementById('songGrid');
-    songGrid.innerHTML = ''; // 清空内容
+    songGrid.innerHTML = '';
+    const start = (currentPage - 1) * songsPerPage;
+    const end = start + songsPerPage;
+    const songsToDisplay = filteredSongs.slice(start, end);
 
-    filteredSongs.forEach(song => {
+    songsToDisplay.forEach(song => {
         const songDiv = document.createElement('div');
         songDiv.classList.add('song-item');
+        const isFavorite = favoriteSongs.has(song.title);
         songDiv.innerHTML = `
             <h3>${song.title}</h3>
             <p>${song.artist}</p>
+            <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" onclick="toggleFavorite('${song.title}')">
+                <i class="fas fa-heart"></i> 收藏
+            </button>
         `;
         songGrid.appendChild(songDiv);
     });
+
+    renderPagination();
+}
+
+// 搜索功能
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    filteredSongs = songs.filter(song => 
+        song.title.toLowerCase().includes(query) || 
+        song.artist.toLowerCase().includes(query)
+    );
+    currentPage = 1;
+    renderSongs();
+    updateStatistics();
+});
+
+// 绑定语言过滤
+document.querySelectorAll('.filter-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const type = button.dataset.type;
+        if (type === 'all') filteredSongs = songs;
+        else if (type === 'favorite') filteredSongs = songs.filter(song => favoriteSongs.has(song.title));
+        else filteredSongs = songs.filter(song => song.type === type);
+
+        currentPage = 1;
+        renderSongs();
+        updateStatistics();
+    });
+});
+
+// 切换收藏状态
+function toggleFavorite(title) {
+    if (favoriteSongs.has(title)) favoriteSongs.delete(title);
+    else favoriteSongs.add(title);
+
+    renderSongs();
 }
