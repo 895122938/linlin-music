@@ -115,13 +115,20 @@ function updateArtistFilter() {
     });
 }
 
-// 更新统计
 function updateStatistics() {
+    // 总歌曲数量
     document.getElementById('totalSongs').textContent = songs.length;
-    document.getElementById('chineseSongs').textContent = songs.filter(song => song.type === 'chinese').length;
-    document.getElementById('japaneseSongs').textContent = songs.filter(song => song.type === 'japanese').length;
-    document.getElementById('englishSongs').textContent = songs.filter(song => song.type === 'english').length;
+
+    // 使用新语言检测方法获取中文、日文和英文歌曲数量
+    const chineseSongsCount = songs.filter(song => detectLanguage(song.title) === 'chinese').length;
+    const japaneseSongsCount = songs.filter(song => detectLanguage(song.title) === 'japanese').length;
+    const englishSongsCount = songs.filter(song => detectLanguage(song.title) === 'english').length;
+
+    document.getElementById('chineseSongs').textContent = chineseSongsCount;
+    document.getElementById('japaneseSongs').textContent = japaneseSongsCount;
+    document.getElementById('englishSongs').textContent = englishSongsCount;
 }
+
 
 // 渲染分页
 function renderPagination() {
