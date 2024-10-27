@@ -67,12 +67,18 @@ const songs = [{"title": "天使的指纹", "artist": "孙燕姿"}, {"title": "�
                {"title": "云与海", "artist": "阿YueYue"}, {"title": "听见下雨的声音", "artist": "A-Lin"}];
 
 
-// 语言检测
+// 改进后的语言检测函数
 function detectLanguage(title) {
-    if (/[\u3040-\u30ff]/.test(title)) return 'japanese'; 
-    if (/^[A-Za-z\s\-\'\"]+$/.test(title)) return 'english';
+    // 检查是否包含中文字符
+    if (/[\u4e00-\u9fff]/.test(title)) return 'chinese'; 
+    // 检查是否包含日文字符（包括假名和汉字）
+    if (/[\u3040-\u30ff\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff]/.test(title)) return 'japanese';
+    // 检查是否为纯英文字符
+    if (/^[A-Za-z\s\-\'\"]+$/.test(title)) return 'english';  
+    // 默认返回中文（因为未识别的字符多数情况下为中文）
     return 'chinese';
 }
+
 
 function getTag(type) {
     switch (type) {
