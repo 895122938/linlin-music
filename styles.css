@@ -5,6 +5,9 @@
     --card-color: #ffffff;
     --text-color: #2d3436;
     --gradient: linear-gradient(135deg, #ff6b81, #ff8e8e);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
 * {
@@ -26,11 +29,12 @@ body {
     margin: 0 auto;
 }
 
+/* 头部样式 */
 .header {
     background: var(--card-color);
     padding: 2.5rem;
     border-radius: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow);
     margin-bottom: 2rem;
     text-align: center;
     position: relative;
@@ -66,6 +70,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* 统计面板 */
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -78,7 +83,7 @@ h1 {
     background: #f8f9ff;
     padding: 1.2rem;
     border-radius: 1rem;
-    transition: transform 0.3s ease;
+    transition: var(--transition);
 }
 
 .stat-item:hover {
@@ -100,24 +105,28 @@ h1 {
     color: #666;
 }
 
-.search-box {
+/* 搜索区域 */
+.search-section {
     background: var(--card-color);
     padding: 1.5rem;
     border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    margin: 2rem 0;
-    display: flex;
-    gap: 1rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 1rem;
 }
 
 .search-input {
-    flex-grow: 1;
-    padding: 1rem 1.5rem;
+    width: 100%;
+    padding: 1rem 3rem 1rem 1.5rem;
     border: 2px solid transparent;
     border-radius: 0.8rem;
     font-size: 1rem;
     background: #f8f9ff;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .search-input:focus {
@@ -126,6 +135,54 @@ h1 {
     background: white;
 }
 
+.search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* 高级筛选 */
+.advanced-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-select {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.8rem;
+    background: #f8f9ff;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.sort-btn {
+    background: #f8f9ff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: #666;
+}
+
+.sort-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* 筛选按钮 */
 .filter-buttons {
     display: flex;
     gap: 1rem;
@@ -141,8 +198,8 @@ h1 {
     padding: 0.8rem 1.5rem;
     border-radius: 0.8rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    box-shadow: var(--shadow);
     font-weight: 500;
 }
 
@@ -155,23 +212,26 @@ h1 {
     transform: translateY(-2px);
 }
 
+/* 歌曲网格 */
 .song-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .song-card {
     background: var(--card-color);
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
     position: relative;
 }
 
 .song-card:hover {
     transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
 }
 
 .song-info {
@@ -182,14 +242,13 @@ h1 {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0.8rem;
-    color: #2d3436;
+    color: var(--text-color);
 }
 
 .song-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
 }
 
 .song-artist {
@@ -206,26 +265,105 @@ h1 {
     font-weight: 500;
 }
 
-.plays-count {
-    font-size: 0.8rem;
-    color: #888;
-    display: block;
+/* 收藏按钮 */
+.favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0.5rem;
 }
 
-.hidden {
-    display: none;
+.favorite-btn.active {
+    color: var(--primary-color);
 }
 
+/* 分页控制 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.page-btn {
+    background: var(--card-color);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-info {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 快捷键提示 */
+.shortcuts-hint {
+    background: var(--card-color);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.shortcuts-hint p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.shortcuts-hint ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+kbd {
+    background: #f8f9ff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    font-family: monospace;
+    margin-right: 0.5rem;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     body {
         padding: 1rem;
     }
 
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     h1 {
         font-size: 2rem;
+    }
+
+    .advanced-filters {
+        flex-direction: column;
+    }
+
+    .filter-select,
+    .sort-buttons {
+        width: 100%;
+    }
+
+    .sort-buttons {
+        justify-content: space-between;
     }
 }
