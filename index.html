@@ -8,6 +8,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </head>
 <body>
+    <!-- 音乐播放器 -->
+    <div class="music-player">
+        <audio id="bgMusic" loop>
+            <source src="好想好想.mp3" type="audio/mp3">
+        </audio>
+        <button id="musicToggle" class="music-toggle" title="背景音乐">
+            <i class="fas fa-music music-icon playing"></i>
+            <i class="fas fa-volume-mute music-icon paused"></i>
+        </button>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>凜凜蝶凜的翻唱曲库</h1>
@@ -19,7 +30,6 @@
                 <div class="stat-item"><div class="stat-value" id="englishSongs">0</div><div class="stat-label">英语歌曲</div></div>
             </div>
         </div>
-
         <div class="search-section">
             <div class="search-box">
                 <input type="text" id="searchInput" class="search-input" placeholder="搜索歌曲名称或原唱...">
@@ -34,7 +44,6 @@
                 </div>
             </div>
         </div>
-
         <div class="filter-buttons">
             <button class="filter-btn active" data-type="all">全部歌曲</button>
             <button class="filter-btn" data-type="hot">热门推荐</button>
@@ -43,10 +52,56 @@
             <button class="filter-btn" data-type="english">英语</button>
             <button class="filter-btn" data-type="favorite"><i class="fas fa-heart"></i> 我的收藏</button>
         </div>
-
         <div class="song-grid" id="songGrid"></div>
         <div class="pagination" id="pagination"></div>
     </div>
+
     <script src="script.js"></script>
+    <!-- 背景音乐控制脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('bgMusic');
+            const musicToggle = document.getElementById('musicToggle');
+            let isPlaying = false;
+
+            // 设置音量
+            audio.volume = 0.3; // 30%音量，避免太大声
+
+            // 尝试自动播放
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    isPlaying = true;
+                    musicToggle.classList.add('is-playing');
+                })
+                .catch(error => {
+                    isPlaying = false;
+                    musicToggle.classList.remove('is-playing');
+                });
+            }
+
+            // 点击切换播放状态
+            musicToggle.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    musicToggle.classList.remove('is-playing');
+                } else {
+                    audio.play();
+                    musicToggle.classList.add('is-playing');
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // 页面可见性变化时处理音乐播放
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && isPlaying) {
+                    audio.pause();
+                    musicToggle.classList.remove('is-playing');
+                    isPlaying = false;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
