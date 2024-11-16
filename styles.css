@@ -1,12 +1,12 @@
 :root {
     --primary-color: #ff6b81;
     --secondary-color: #ffd4d4;
-    --background-color: #f8f9fc;
-    --card-color: #ffffff;
+    --background-color: rgba(248, 249, 252, 0.97); /* 稍微调整透明度 */
+    --card-color: rgba(255, 255, 255, 0.95);
     --text-color: #2d3436;
     --gradient: linear-gradient(135deg, #ff6b81, #ff8e8e);
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     --transition: all 0.3s ease;
 }
 
@@ -19,14 +19,32 @@
 
 body {
     background: var(--background-color);
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--text-color);
     min-height: 100vh;
     padding: 2rem;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(248, 249, 252, 0.85);  /* 半透明背景遮罩 */
+    z-index: -1;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 }
 
 /* 头部样式 */
@@ -39,6 +57,7 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);  /* 磨砂玻璃效果 */
 }
 
 .header::before {
@@ -59,6 +78,7 @@ h1 {
     background-clip: text;
     color: transparent;
     display: inline-block;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* 添加文字阴影 */
 }
 
 .description {
@@ -80,14 +100,16 @@ h1 {
 }
 
 .stat-item {
-    background: #f8f9ff;
+    background: var(--card-color);
     padding: 1.2rem;
     border-radius: 1rem;
     transition: var(--transition);
+    backdrop-filter: blur(10px);
 }
 
 .stat-item:hover {
     transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
 }
 
 .stat-value {
@@ -112,6 +134,7 @@ h1 {
     border-radius: 1rem;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
 }
 
 .search-box {
@@ -125,7 +148,7 @@ h1 {
     border: 2px solid transparent;
     border-radius: 0.8rem;
     font-size: 1rem;
-    background: #f8f9ff;
+    background: rgba(248, 249, 255, 0.9);
     transition: var(--transition);
 }
 
@@ -133,6 +156,7 @@ h1 {
     outline: none;
     border-color: var(--primary-color);
     background: white;
+    box-shadow: 0 0 0 3px rgba(255, 107, 129, 0.1);  /* 添加焦点光晕 */
 }
 
 .search-icon {
@@ -156,10 +180,15 @@ h1 {
     padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 0.8rem;
-    background: #f8f9ff;
+    background: rgba(248, 249, 255, 0.9);
     font-size: 1rem;
     color: #666;
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-select:hover {
+    background: white;
 }
 
 .sort-buttons {
@@ -168,7 +197,7 @@ h1 {
 }
 
 .sort-btn {
-    background: #f8f9ff;
+    background: rgba(248, 249, 255, 0.9);
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 0.8rem;
@@ -201,6 +230,7 @@ h1 {
     transition: var(--transition);
     box-shadow: var(--shadow);
     font-weight: 500;
+    backdrop-filter: blur(5px);
 }
 
 .filter-btn.active {
@@ -210,6 +240,7 @@ h1 {
 
 .filter-btn:hover {
     transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
 }
 
 /* 歌曲网格 */
@@ -227,6 +258,7 @@ h1 {
     box-shadow: var(--shadow);
     transition: var(--transition);
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
 .song-card:hover {
@@ -257,7 +289,7 @@ h1 {
 }
 
 .tag {
-    background: #f8f9ff;
+    background: rgba(248, 249, 255, 0.9);
     color: var(--primary-color);
     padding: 0.4rem 1rem;
     border-radius: 2rem;
@@ -270,16 +302,19 @@ h1 {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.8);
     border: none;
     color: #ccc;
     cursor: pointer;
     transition: var(--transition);
     padding: 0.5rem;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
 }
 
 .favorite-btn.active {
     color: var(--primary-color);
+    background: white;
 }
 
 /* 分页控制 */
@@ -299,6 +334,12 @@ h1 {
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+}
+
+.page-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
 }
 
 .page-btn:disabled {
@@ -318,6 +359,7 @@ h1 {
     border-radius: 1rem;
     margin-top: 2rem;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
 }
 
 .shortcuts-hint p {
@@ -333,11 +375,13 @@ h1 {
 }
 
 kbd {
-    background: #f8f9ff;
+    background: rgba(248, 249, 255, 0.9);
     padding: 0.2rem 0.5rem;
     border-radius: 0.3rem;
     font-family: monospace;
     margin-right: 0.5rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 0 #ddd;
 }
 
 /* 响应式设计 */
