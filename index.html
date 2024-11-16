@@ -8,15 +8,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </head>
 <body>
-    <!-- 添加音乐播放器 -->
+    <!-- 音乐播放器 -->
     <div class="music-player">
         <audio id="bgMusic" loop>
-            <source src="00d0.mp3" type="audio/mp3">
+            <source src="./assets/background-music.mp3" type="audio/mp3">
+            您的浏览器不支持音频播放
         </audio>
         <button id="musicToggle" class="music-toggle" title="背景音乐">
             <i class="fas fa-music music-icon playing"></i>
             <i class="fas fa-volume-mute music-icon paused"></i>
         </button>
+        <div class="volume-control">
+            <input type="range" id="volumeSlider" min="0" max="100" value="30">
+        </div>
     </div>
 
     <div class="container">
@@ -24,10 +28,22 @@
             <h1>凜凜蝶凜的翻唱曲库</h1>
             <p class="description">欢迎来到凜凜蝶凜的歌单页面！这里收录了所有可以点播的翻唱曲目，希望能带给大家温暖与感动。</p>
             <div class="stats" id="stats">
-                <div class="stat-item"><div class="stat-value" id="totalSongs">0</div><div class="stat-label">可点播歌曲</div></div>
-                <div class="stat-item"><div class="stat-value" id="chineseSongs">0</div><div class="stat-label">国语歌曲</div></div>
-                <div class="stat-item"><div class="stat-value" id="japaneseSongs">0</div><div class="stat-label">日语歌曲</div></div>
-                <div class="stat-item"><div class="stat-value" id="englishSongs">0</div><div class="stat-label">英语歌曲</div></div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalSongs">0</div>
+                    <div class="stat-label">可点播歌曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="chineseSongs">0</div>
+                    <div class="stat-label">国语歌曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="japaneseSongs">0</div>
+                    <div class="stat-label">日语歌曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="englishSongs">0</div>
+                    <div class="stat-label">英语歌曲</div>
+                </div>
             </div>
         </div>
 
@@ -38,10 +54,16 @@
             </div>
             
             <div class="advanced-filters">
-                <select id="artistFilter" class="filter-select"><option value="">所有歌手</option></select>
+                <select id="artistFilter" class="filter-select">
+                    <option value="">所有歌手</option>
+                </select>
                 <div class="sort-buttons">
-                    <button class="sort-btn" data-sort="title"><i class="fas fa-sort-alpha-down"></i> 按歌名排序</button>
-                    <button class="sort-btn" data-sort="artist"><i class="fas fa-sort-alpha-down"></i> 按歌手排序</button>
+                    <button class="sort-btn" data-sort="title">
+                        <i class="fas fa-sort-alpha-down"></i> 按歌名排序
+                    </button>
+                    <button class="sort-btn" data-sort="artist">
+                        <i class="fas fa-sort-alpha-down"></i> 按歌手排序
+                    </button>
                 </div>
             </div>
         </div>
@@ -52,58 +74,26 @@
             <button class="filter-btn" data-type="chinese">国语</button>
             <button class="filter-btn" data-type="japanese">日语</button>
             <button class="filter-btn" data-type="english">英语</button>
-            <button class="filter-btn" data-type="favorite"><i class="fas fa-heart"></i> 我的收藏</button>
+            <button class="filter-btn" data-type="favorite">
+                <i class="fas fa-heart"></i> 我的收藏
+            </button>
         </div>
 
         <div class="song-grid" id="songGrid"></div>
         <div class="pagination" id="pagination"></div>
+        
+        <!-- 快捷键提示 -->
+        <div class="shortcuts-hint">
+            <p>快捷键：</p>
+            <ul>
+                <li><kbd>Space</kbd> 播放/暂停背景音乐</li>
+                <li><kbd>→</kbd> 下一页</li>
+                <li><kbd>←</kbd> 上一页</li>
+                <li><kbd>/</kbd> 搜索框</li>
+            </ul>
+        </div>
     </div>
 
     <script src="script.js"></script>
-    <!-- 添加音乐控制脚本 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const audio = document.getElementById('bgMusic');
-            const musicToggle = document.getElementById('musicToggle');
-            let isPlaying = false;
-
-            // 设置初始音量
-            audio.volume = 0.3; // 30%音量，避免太大声
-
-            // 播放控制
-            musicToggle.addEventListener('click', function() {
-                if (isPlaying) {
-                    audio.pause();
-                    musicToggle.classList.remove('is-playing');
-                } else {
-                    audio.play().then(() => {
-                        musicToggle.classList.add('is-playing');
-                    }).catch(error => {
-                        // 处理自动播放被阻止的情况
-                        console.log('播放被阻止，需要用户交互:', error);
-                    });
-                }
-                isPlaying = !isPlaying;
-            });
-
-            // 尝试自动播放
-            audio.play().then(() => {
-                isPlaying = true;
-                musicToggle.classList.add('is-playing');
-            }).catch(error => {
-                // 自动播放被阻止是正常的，等待用户交互
-                console.log('自动播放被阻止，等待用户交互:', error);
-            });
-
-            // 页面可见性变化处理
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden && isPlaying) {
-                    audio.pause();
-                    musicToggle.classList.remove('is-playing');
-                    isPlaying = false;
-                }
-            });
-        });
-    </script>
 </body>
 </html>
