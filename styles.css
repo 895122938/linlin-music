@@ -8,7 +8,7 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
-    --overlay-color: rgba(248, 249, 252, 0.85); /* 背景遮罩颜色 */
+    --overlay-color: rgba(248, 249, 252, 0.65); /* 背景遮罩颜色 */
 }
 
 * {
