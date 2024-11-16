@@ -8,6 +8,7 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --overlay-color: rgba(248, 249, 252, 0.85); /* 背景遮罩颜色 */
 }
 
 * {
@@ -18,7 +19,9 @@
 }
 
 body {
-    background: var(--background-color);
+    background: linear-gradient(var(--overlay-color), var(--overlay-color)),
+                url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--text-color);
     min-height: 100vh;
     padding: 2rem;
@@ -27,11 +30,15 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
 }
 
 /* 头部样式 */
 .header {
-    background: var(--card-color);
+    background: rgba(255, 255, 255, 0.9);
     padding: 2.5rem;
     border-radius: 1.5rem;
     box-shadow: var(--shadow);
@@ -80,7 +87,8 @@ h1 {
 }
 
 .stat-item {
-    background: #f8f9ff;
+    background: rgba(248, 249, 255, 0.9);
+    backdrop-filter: blur(5px);
     padding: 1.2rem;
     border-radius: 1rem;
     transition: var(--transition);
@@ -107,7 +115,8 @@ h1 {
 
 /* 搜索区域 */
 .search-section {
-    background: var(--card-color);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
     padding: 1.5rem;
     border-radius: 1rem;
     box-shadow: var(--shadow);
@@ -221,7 +230,8 @@ h1 {
 }
 
 .song-card {
-    background: var(--card-color);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -278,7 +288,7 @@ h1 {
     padding: 0.5rem;
 }
 
-.favorite-btn.active {
+.favorite-btn.active, .favorite-btn.favorited {
     color: var(--primary-color);
 }
 
@@ -304,6 +314,11 @@ h1 {
 .page-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.page-btn.active {
+    background: var(--gradient);
+    color: white;
 }
 
 .page-info {
