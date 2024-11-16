@@ -260,20 +260,18 @@ h1 {
     position: relative;
     backdrop-filter: blur(10px);
     padding: 1.5rem;
+    padding-top: 2.5rem; /* 增加顶部内边距，为HOT标签留出空间 */
 }
 
-.song-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow);
-}
-
+/* 歌曲标题调整 */
 .song-title {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0.8rem;
     color: var(--text-color);
+    word-break: break-all; /* 允许在任意字符间断行 */
+    line-height: 1.4; /* 增加行高 */
 }
-
 .song-meta {
     display: flex;
     justify-content: space-between;
@@ -295,18 +293,18 @@ h1 {
     font-weight: 500;
 }
 
-/* 热门标签 */
 .hot-tag {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 0.5rem; /* 调整位置到更上方 */
+    left: 0.5rem;
     background: var(--gradient);
     color: white;
-    padding: 0.4rem 1rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 2rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 500;
     box-shadow: var(--shadow);
+    z-index: 1; /* 确保HOT标签在最上层 */
 }
 
 /* 收藏按钮 */
