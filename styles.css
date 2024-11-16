@@ -1,24 +1,13 @@
 :root {
     --primary-color: #ff6b81;
     --secondary-color: #ffd4d4;
-    --background-color: rgba(248, 249, 252, 0.97);
+    --background-color: rgba(248, 249, 252, 0.97); /* 稍微调整透明度 */
     --card-color: rgba(255, 255, 255, 0.95);
     --text-color: #2d3436;
     --gradient: linear-gradient(135deg, #ff6b81, #ff8e8e);
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     --transition: all 0.3s ease;
-}
-
-/* 暗色主题变量 */
-[data-theme="dark"] {
-    --primary-color: #ff8e8e;
-    --secondary-color: #ff6b81;
-    --background-color: rgba(28, 28, 30, 0.97);
-    --card-color: rgba(44, 44, 46, 0.95);
-    --text-color: #ffffff;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -48,7 +37,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(248, 249, 252, 0.85);
+    background: rgba(248, 249, 252, 0.85);  /* 半透明背景遮罩 */
     z-index: -1;
 }
 
@@ -56,161 +45,6 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-}
-
-/* 主题切换按钮 */
-.theme-toggle {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background: var(--card-color);
-    border: none;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-    backdrop-filter: blur(10px);
-}
-
-.theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: var(--hover-shadow);
-}
-
-.theme-toggle .light-icon,
-.theme-toggle .dark-icon {
-    position: absolute;
-    transition: var(--transition);
-}
-
-[data-theme="light"] .theme-toggle .light-icon {
-    opacity: 0;
-    transform: scale(0.5);
-}
-
-[data-theme="light"] .theme-toggle .dark-icon {
-    opacity: 1;
-    transform: scale(1);
-}
-
-[data-theme="dark"] .theme-toggle .light-icon {
-    opacity: 1;
-    transform: scale(1);
-}
-
-[data-theme="dark"] .theme-toggle .dark-icon {
-    opacity: 0;
-    transform: scale(0.5);
-}
-
-/* 音乐播放器 */
-.music-player {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 1000;
-}
-
-.music-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--card-color);
-    padding: 0.5rem;
-    border-radius: 2rem;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-
-.music-controls:hover {
-    box-shadow: var(--hover-shadow);
-}
-
-.music-toggle {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-}
-
-.music-toggle:hover {
-    transform: scale(1.1);
-}
-
-.music-icon {
-    position: absolute;
-    transition: all 0.3s ease;
-}
-
-.music-icon.playing {
-    opacity: 0;
-    transform: scale(0.5);
-}
-
-.music-icon.paused {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.music-toggle.is-playing .music-icon.playing {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.music-toggle.is-playing .music-icon.paused {
-    opacity: 0;
-    transform: scale(0.5);
-}
-
-.volume-control {
-    width: 0;
-    overflow: hidden;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-}
-
-.music-controls:hover .volume-control {
-    width: 100px;
-}
-
-.volume-slider {
-    width: 100px;
-    height: 4px;
-    -webkit-appearance: none;
-    background: var(--secondary-color);
-    border-radius: 2px;
-    outline: none;
-}
-
-.volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
 }
 
 /* 头部样式 */
@@ -223,7 +57,7 @@ body::before {
     text-align: center;
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);  /* 磨砂玻璃效果 */
 }
 
 .header::before {
@@ -244,7 +78,7 @@ h1 {
     background-clip: text;
     color: transparent;
     display: inline-block;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* 添加文字阴影 */
 }
 
 .description {
@@ -322,7 +156,7 @@ h1 {
     outline: none;
     border-color: var(--primary-color);
     background: white;
-    box-shadow: 0 0 0 3px rgba(255, 107, 129, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 107, 129, 0.1);  /* 添加焦点光晕 */
 }
 
 .search-icon {
@@ -550,6 +384,63 @@ kbd {
     box-shadow: 0 2px 0 #ddd;
 }
 
+/* 音乐播放器样式 */
+.music-player {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.music-toggle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--card-color);
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--hover-shadow);
+    background: white;
+}
+
+.music-icon {
+    position: absolute;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+}
+
+.music-icon.playing {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.music-icon.paused {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.music-toggle.is-playing .music-icon.playing {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.music-toggle.is-playing .music-icon.paused {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
 /* 音乐播放器动画 */
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -559,47 +450,6 @@ kbd {
 
 .music-toggle.is-playing {
     animation: pulse 2s infinite ease-in-out;
-}
-
-/* 暗色主题适配 */
-[data-theme="dark"] .search-input,
-[data-theme="dark"] .filter-select,
-[data-theme="dark"] .sort-btn {
-    background: rgba(58, 58, 60, 0.9);
-    color: #fff;
-}
-
-[data-theme="dark"] .description,
-[data-theme="dark"] .stat-label,
-[data-theme="dark"] .song-artist,
-[data-theme="dark"] .page-info {
-    color: #a0a0a0;
-}
-
-[data-theme="dark"] .search-input:focus {
-    background: rgba(68, 68, 70, 0.9);
-}
-
-[data-theme="dark"] kbd {
-    background: rgba(58, 58, 60, 0.9);
-    border-color: #666;
-    color: #fff;
-}
-
-[data-theme="dark"] body::before {
-    background: rgba(28, 28, 30, 0.85);
-}
-
-[data-theme="dark"] .favorite-btn {
-    background: rgba(44, 44, 46, 0.8);
-}
-
-[data-theme="dark"] .favorite-btn.active {
-    background: rgba(58, 58, 60, 0.9);
-}
-
-[data-theme="dark"] .tag {
-    background: rgba(58, 58, 60, 0.9);
 }
 
 /* 响应式设计 */
@@ -629,98 +479,14 @@ kbd {
         justify-content: space-between;
     }
 
-    .theme-toggle {
-        top: 1rem;
-        right: 1rem;
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    .music-controls {
-        padding: 0.3rem;
-    }
-
-    .music-toggle {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    .music-controls:hover .volume-control {
-        width: 60px;
-    }
-
-    .volume-slider {
-        width: 60px;
-    }
-
     .music-player {
         bottom: 1rem;
         right: 1rem;
     }
 
-    .filter-buttons {
-        gap: 0.5rem;
-    }
-
-    .filter-btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-/* 滚动条样式 */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-}
-
-/* 选中文本样式 */
-::selection {
-    background: var(--primary-color);
-    color: white;
-}
-
-/* 加载动画 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.song-card {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* 优化移动端点击区域 */
-@media (max-width: 768px) {
-    .filter-btn,
-    .sort-btn,
-    .page-btn,
     .music-toggle {
-        min-height: 44px; /* 确保移动端可点击区域足够大 */
-    }
-    
-    .search-input {
-        min-height: 44px;
-        font-size: 16px; /* 避免iOS自动缩放 */
-    }
-}
-
-/* 确保背景图片在移动端也能正确显示 */
-@media (max-width: 480px) {
-    body {
-        background-attachment: scroll; /* 在较小屏幕上禁用固定背景，提高性能 */
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
     }
 }
