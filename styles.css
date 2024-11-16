@@ -384,6 +384,74 @@ kbd {
     box-shadow: 0 2px 0 #ddd;
 }
 
+/* 音乐播放器样式 */
+.music-player {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.music-toggle {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--card-color);
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--hover-shadow);
+    background: white;
+}
+
+.music-icon {
+    position: absolute;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+}
+
+.music-icon.playing {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.music-icon.paused {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.music-toggle.is-playing .music-icon.playing {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.music-toggle.is-playing .music-icon.paused {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+/* 音乐播放器动画 */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.music-toggle.is-playing {
+    animation: pulse 2s infinite ease-in-out;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     body {
@@ -409,5 +477,52 @@ kbd {
 
     .sort-buttons {
         justify-content: space-between;
+    }
+
+    .music-player {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .music-toggle {
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 1rem;
+    }
+}
+
+/* 暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: rgba(28, 28, 30, 0.97);
+        --card-color: rgba(44, 44, 46, 0.95);
+        --text-color: #ffffff;
+    }
+
+    .description,
+    .stat-label,
+    .search-input,
+    .filter-select,
+    .sort-btn,
+    .filter-btn,
+    .song-artist,
+    .page-info {
+        color: #a0a0a0;
+    }
+
+    .search-input,
+    .filter-select,
+    .sort-btn {
+        background: rgba(58, 58, 60, 0.9);
+    }
+
+    .search-input:focus {
+        background: rgba(68, 68, 70, 0.9);
+    }
+
+    kbd {
+        background: rgba(58, 58, 60, 0.9);
+        border-color: #666;
+        color: #fff;
     }
 }
